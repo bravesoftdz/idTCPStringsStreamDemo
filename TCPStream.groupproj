@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{7905D8BC-E706-443E-8EE5-6FBEAB3F4BF5}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="TCPStreamServer\TCPStreamServer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="TCPStreamClient\TCPStreamClient.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="TCPStreamServer">
+        <MSBuild Projects="TCPStreamServer\TCPStreamServer.dproj"/>
+    </Target>
+    <Target Name="TCPStreamServer:Clean">
+        <MSBuild Projects="TCPStreamServer\TCPStreamServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TCPStreamServer:Make">
+        <MSBuild Projects="TCPStreamServer\TCPStreamServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TCPStreamClient">
+        <MSBuild Projects="TCPStreamClient\TCPStreamClient.dproj"/>
+    </Target>
+    <Target Name="TCPStreamClient:Clean">
+        <MSBuild Projects="TCPStreamClient\TCPStreamClient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TCPStreamClient:Make">
+        <MSBuild Projects="TCPStreamClient\TCPStreamClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="TCPStreamServer;TCPStreamClient"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="TCPStreamServer:Clean;TCPStreamClient:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="TCPStreamServer:Make;TCPStreamClient:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
